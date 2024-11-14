@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/bloc/lanugage_cubit/language_cubit.dart';
+import 'package:flutter_app/cubits/language_cubit/language_cubit.dart';
+import 'package:flutter_app/cubits/theme/theme_cubit.dart';
 import 'package:flutter_app/generated/l10n.dart';
 import 'package:flutter_app/views/home/login_view.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -9,6 +10,8 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.amber,
@@ -35,7 +38,21 @@ class HomeView extends StatelessWidget {
                   return const LoginView();
                 }));
               },
-              child: Text("Go to login page"),
+              child: Text(
+                "Go to login page",
+                style: Theme.of(context).textTheme.bodyLarge,
+              ),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                context.read<ThemeCubit>().toggleTheme(!isDarkMode);
+              },
+              child: Text(
+                isDarkMode ? "Light Mode" : "Dark Mode",
+                style: TextStyle(
+                  color: isDarkMode ? Colors.white : Colors.black,
+                ),
+              ),
             ),
           ],
         ),

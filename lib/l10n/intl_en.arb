@@ -1,0 +1,13 @@
+{
+  "title": "Home page",
+  "login": "Login",
+  "password": "Password",
+  "email": "Email",
+  "name": "Name",
+  "phone": "Phone",
+  "address": "Address",
+  "save": "Save",
+  "error_message": "Error message",
+  "success": "Success",
+  "about": "about"
+}

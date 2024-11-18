@@ -159,6 +159,56 @@ class S {
       args: [],
     );
   }
+
+  /// `Ayah`
+  String get ayah {
+    return Intl.message(
+      'Ayah',
+      name: 'ayah',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Surah`
+  String get surah {
+    return Intl.message(
+      'Surah',
+      name: 'surah',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Surah List`
+  String get Fuhras {
+    return Intl.message(
+      'Surah List',
+      name: 'Fuhras',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Search`
+  String get search {
+    return Intl.message(
+      'Search',
+      name: 'search',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Number`
+  String get Number {
+    return Intl.message(
+      'Number',
+      name: 'Number',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

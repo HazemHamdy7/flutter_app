@@ -9,5 +9,10 @@
   "save": "حفظ",
   "error_message": "رسالة الخطأ",
   "success": "نجاح",
-  "about": "عننا"
+  "about": "عننا",
+  "ayah": "آيـة",
+  "surah": "سورة",
+  "Fuhras": "فهرس السور",
+  "search": "بحث",
+  "Number": "الرقم"
 }

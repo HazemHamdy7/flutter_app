@@ -9,5 +9,10 @@
   "save": "Save",
   "error_message": "Error message",
   "success": "Success",
-  "about": "about"
+  "about": "about",
+  "ayah": "Ayah",
+  "surah": "Surah",
+  "Fuhras": "Surah List",
+  "search": "Search",
+  "Number": "Number"
 }

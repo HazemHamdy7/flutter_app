@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/cubits/language_cubit/language_cubit.dart';
-import 'package:flutter_app/cubits/theme/theme_cubit.dart';
+import 'package:flutter_app/cubits/theme_cubit/theme_cubit.dart';
 import 'package:flutter_app/generated/l10n.dart';
-import 'package:flutter_app/views/home/home_view.dart';
+import 'package:flutter_app/views/home/surah_list.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+
   runApp(const MyApp());
 }
 
@@ -18,7 +20,7 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-            create: (context) => LanguageCubit()..changeLanguage("en")),
+            create: (context) => LanguageCubit()..changeLanguage("ar")),
         BlocProvider(create: (context) => ThemeCubit()..setInintialTheme()),
       ],
       child: BlocBuilder<ThemeCubit, ThemeState>(
@@ -36,9 +38,8 @@ class MyApp extends StatelessWidget {
                 ],
                 supportedLocales: S.delegate.supportedLocales,
                 title: 'Flutter Demo',
-                theme: themeState
-                    .themeData, // Set theme data based on ThemeCubit state
-                home: const HomeView(),
+                theme: themeState.themeData,
+                home: const SurahListScreen(),
               );
             },
           );

@@ -2,11 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/cubits/language_cubit/language_cubit.dart';
 import 'package:flutter_app/features/Quran/list_quran/cubit/surah_list_cubit.dart';
 import 'package:flutter_app/features/Quran/list_quran/cubit/surah_list_state.dart';
-import 'package:flutter_app/features/Quran/view_quran/model/quran_model.dart';
 import 'package:flutter_app/features/Quran/view_quran/views/surah_detail_screen.dart';
 import 'package:flutter_app/generated/l10n.dart';
 import 'package:flutter_app/utils/helper/to_arabic.dart';
-import 'package:flutter_app/features/Quran/list_quran/componant/list_of_quran.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SurahListScreen extends StatefulWidget {
@@ -108,6 +106,7 @@ class _SurahListScreenState extends State<SurahListScreen> {
                 itemCount: _filteredSurahs.length,
                 itemBuilder: (context, index) {
                   final surah = _filteredSurahs[index];
+
                   final backgroundColor =
                       index % 2 == 0 ? Colors.grey[200] : Colors.white;
 
@@ -135,7 +134,7 @@ class _SurahListScreenState extends State<SurahListScreen> {
                           context,
                           MaterialPageRoute(
                             builder: (context) =>
-                                SurahDetailScreen(ayah: surah),
+                                SurahDetailScreen(surah: surah),
                           ),
                         );
                       },
@@ -182,9 +181,7 @@ class _SurahListScreenState extends State<SurahListScreen> {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => SurahDetailScreen(
-                  ayah: surah,
-                ),
+                builder: (context) => SurahDetailScreen(surah: surah),
               ),
             );
           },

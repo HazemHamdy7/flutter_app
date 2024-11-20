@@ -77,6 +77,18 @@ class Ayah {
       sajda: json['sajda'],
     );
   }
+
+  Map<String, dynamic> toJson() => {
+        'number': number,
+        'text': text,
+        'numberInSurah': numberInSurah,
+        'juz': juz,
+        'manzil': manzil,
+        'page': page,
+        'ruku': ruku,
+        'hizbQuarter': hizbQuarter,
+        'sajda': sajda,
+      };
 }
 
 class Edition {

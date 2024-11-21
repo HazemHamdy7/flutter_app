@@ -1,4 +1,4 @@
- import 'package:flutter_app/features/Quran/view_quran/model/quran_model.dart';
+import 'package:flutter_app/features/Quran/list_quran/model/quran_responese.dart';
 
 abstract class QuranState {}
 

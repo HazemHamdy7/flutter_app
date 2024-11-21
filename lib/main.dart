@@ -2,12 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/cubits/language_cubit/language_cubit.dart';
 import 'package:flutter_app/cubits/theme_cubit/theme_cubit.dart';
 import 'package:flutter_app/features/Quran/list_quran/view/surah_list_screen.dart';
-import 'package:flutter_app/features/Quran/view_quran/cubit/quran_view_cubit.dart';
-import 'package:flutter_app/features/Quran/view_quran/cubit/quran_view_state.dart';
-import 'package:flutter_app/features/Quran/view_quran/model/quran_model.dart';
-import 'package:flutter_app/features/Quran/view_quran/views/surah_detail_screen.dart';
 import 'package:flutter_app/generated/l10n.dart';
-import 'package:flutter_app/views/home/surah_list.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 

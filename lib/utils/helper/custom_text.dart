@@ -5,11 +5,15 @@ class CustomText extends StatelessWidget {
     super.key,
     TextAlign textAlign = TextAlign.center,
     required this.text,
+    this.fontFamily,
     required int fontSize,
     required FontWeight fontWeight,
     required Color color,
   });
+
+  
   final String text;
+  final String? fontFamily;
   double? fontSize;
   FontWeight? fontWeight;
   Color? color;
@@ -23,6 +27,7 @@ class CustomText extends StatelessWidget {
           color: Colors.white,
           fontSize: fontSize,
           fontWeight: fontWeight,
+          fontFamily: fontFamily,
         ));
   }
 }

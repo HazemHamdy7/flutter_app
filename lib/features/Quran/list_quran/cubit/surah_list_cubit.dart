@@ -1,37 +1,10 @@
-// import 'dart:convert';
-
-// import 'package:flutter/services.dart';
-// import 'package:flutter_app/features/Quran/list_quran/cubit/surah_list_state.dart';
-// import 'package:flutter_app/features/Quran/list_quran/model/list_of_surah.dart';
-// import 'package:flutter_app/features/Quran/list_quran/model/surah_detail.dart';
-// import 'package:flutter_app/utils/helper/constants.dart';
-// import 'package:flutter_bloc/flutter_bloc.dart';
-
-// class SurahCubit extends Cubit<SurahState> {
-//   SurahCubit() : super(SurahInitial());
-
-//   Future<void> loadNameOfSurah() async {
-//     emit(SurahLoading());
-//     try {
-//       final String response = await rootBundle.loadString(AppHelpers.quran);
-//       final List<dynamic> data = json.decode(response);
-//       final List<SurahDetail> surahs = data
-//           .map((json) => SurahDetail.fromJson(json as Map<String, dynamic>))
-//           .toList();
-//       emit(SurahLoaded(surahs));
-//     } catch (e) {
-//       emit(SurahError('Failed to load Surah data: $e'));
-//     }
-//   }
-// }
 import 'dart:developer';
-
-import 'package:flutter_app/features/Quran/list_quran/cubit/surah_list_state.dart';
 import 'package:flutter_app/features/Quran/list_quran/model/quran_responese.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dio/dio.dart';
 
 class SurahCubit extends Cubit<List<Surah>> {
+  final List<Surah> _allSurahs = [];
   SurahCubit() : super([]);
 
   final Dio _dio = Dio();
@@ -53,5 +26,21 @@ class SurahCubit extends Cubit<List<Surah>> {
       emit([]); // Emit an empty list on error
     }
   }
-}
 
+  void filterSurahs(String query) {
+    if (query.isEmpty) {
+      emit(_allSurahs); 
+    } else {
+      final filtered = _allSurahs.where((surah) {
+        final surahName = surah.name?.toLowerCase() ?? '';
+        final englishName = surah.englishName?.toLowerCase() ?? '';
+        final surahNumber = surah.number.toString();
+
+        return surahName.contains(query.toLowerCase()) ||
+            englishName.contains(query.toLowerCase()) ||
+            surahNumber.contains(query);
+      }).toList();
+      emit(filtered); 
+    }
+  }
+}

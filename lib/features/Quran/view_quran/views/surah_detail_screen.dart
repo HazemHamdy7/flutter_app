@@ -1,57 +1,6 @@
-// import 'package:flutter/material.dart';
-// import 'package:flutter_app/features/Quran/view_quran/cubit/quran_view_cubit.dart';
-// import 'package:flutter_app/features/Quran/view_quran/cubit/quran_view_state.dart';
-// import 'package:flutter_app/features/Quran/view_quran/model/quran_model.dart';
-// import 'package:flutter_bloc/flutter_bloc.dart';
-
-// class SurahDetailScreen extends StatelessWidget {
-//   final Ayah ayah;
-
-//   SurahDetailScreen({
-//     Key? key,
-//     required this.ayah,
-//   }) : super(key: key);
-
-//   @override
-//   Widget build(BuildContext context) {
-//     // Use `surah` to display the Surah details and Ayahs
-//     final Surah surah;
-//     return Scaffold(
-//       appBar: AppBar(
-//           // title: Text(surah.name),
-//           ),
-//       body: BlocProvider(
-//         create: (context) => QuranCubit()..loadAyahs(),
-//         child: BlocBuilder<QuranCubit, QuranState>(
-//           builder: (context, state) {
-//             if (state is QuranLoading) {
-//               return const Center(child: CircularProgressIndicator());
-//             } else if (state is QuranError) {
-//               return Center(child: Text(state.errorMessage));
-//             } else if (state is QuranLoaded) {
-//               return ListView.builder(
-//                 itemCount: 1,
-//                 itemBuilder: (context, index) {
-//                   return ListTile(
-//                     title: Text(ayah.text),
-//                     subtitle: Text("Ayah ${ayah.number}"),
-//                     onTap: () {
-//                       // Handle modal bottom sheet or any other action
-//                     },
-//                   );
-//                 },
-//               );
-//             }
-//             return const Center(child: Text('No Quran data available'));
-//           },
-//         ),
-//       ),
-//     );
-//   }
-// }
-
 import 'package:flutter/material.dart';
 import 'package:flutter_app/features/Quran/list_quran/model/surah_detail.dart';
+import 'package:flutter_app/features/Quran/view_quran/componant/retun_basmala.dart';
 import 'package:flutter_app/features/Quran/view_quran/cubit/quran_view_cubit.dart';
 import 'package:flutter_app/utils/helper/to_arabic.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -82,7 +31,7 @@ class _SurahDetailScreenState extends State<SurahDetailScreen> {
   void initState() {
     super.initState();
     _itemScrollController = ItemScrollController();
-    _loadFontSize(); // Load saved font size
+    // _loadFontSize(); // Load saved font size
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (widget.initialAyahNumber != null) {
@@ -93,7 +42,6 @@ class _SurahDetailScreenState extends State<SurahDetailScreen> {
     });
   }
 
-  // Load the font size from SharedPreferences
   Future<void> _loadFontSize() async {
     final prefs = await SharedPreferences.getInstance();
     setState(() {
@@ -102,7 +50,6 @@ class _SurahDetailScreenState extends State<SurahDetailScreen> {
     });
   }
 
-  // Save the font size to SharedPreferences
   Future<void> _saveFontSize(double size) async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setDouble('fontSize', size);
@@ -374,19 +321,4 @@ void _onLongPress(
       );
     },
   );
-}
-
-class RetunBasmala extends StatelessWidget {
-  const RetunBasmala({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Text(
-        'بسم الله الرحمن الرحيم',
-        style: TextStyle(fontSize: 30),
-        textDirection: TextDirection.rtl,
-      ),
-    );
-  }
 }

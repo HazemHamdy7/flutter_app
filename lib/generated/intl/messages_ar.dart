@@ -31,6 +31,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "error_message": MessageLookupByLibrary.simpleMessage("رسالة الخطأ"),
         "login": MessageLookupByLibrary.simpleMessage("تسجيل الدخول"),
         "name": MessageLookupByLibrary.simpleMessage("الإسم"),
+        "parts": MessageLookupByLibrary.simpleMessage("أجزاء"),
         "password": MessageLookupByLibrary.simpleMessage("كلمة المرور"),
         "phone": MessageLookupByLibrary.simpleMessage("الهاتف"),
         "save": MessageLookupByLibrary.simpleMessage("حفظ"),

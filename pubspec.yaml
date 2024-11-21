@@ -44,6 +44,7 @@ dependencies:
   shared_preferences: ^2.3.2
   share_plus: ^10.1.1
   url_launcher: ^6.3.1
+  path_provider: ^2.0.14
 
 dev_dependencies:
   flutter_test:
@@ -68,6 +69,13 @@ flutter:
   assets:
     - assets/image/
     - assets/json/
+    - assets/svgs/
+
+flutter_assets:
+  assets_path: assets/svgs/
+  output_path: lib/constants/
+  filename: assets.dart
+  field_prefix:
   #   - images/a_dot_ham.jpeg
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

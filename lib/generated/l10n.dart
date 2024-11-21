@@ -209,6 +209,36 @@ class S {
       args: [],
     );
   }
+
+  /// `Madinan`
+  String get Madinan {
+    return Intl.message(
+      'Madinan',
+      name: 'Madinan',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Maccan`
+  String get Maccan {
+    return Intl.message(
+      'Maccan',
+      name: 'Maccan',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Parts`
+  String get parts {
+    return Intl.message(
+      'Parts',
+      name: 'parts',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

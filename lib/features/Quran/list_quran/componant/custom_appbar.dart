@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/constants/assets.dart';
 import 'package:flutter_app/features/choose_language/cubits/language_cubit/language_cubit.dart';
 import 'package:flutter_app/generated/l10n.dart';
+import 'package:flutter_app/utils/helper/app_colors.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_app/features/choose_system/cubit/theme_cubit/theme_cubit.dart';
@@ -22,7 +23,7 @@ AppBar customAppBar(BuildContext context) {
           S.of(context).Fuhras,
           style: TextStyle(
             fontWeight: FontWeight.bold,
-            color: isDark ? Colors.white : Colors.black,
+            color: isDark ? AppColors.white : AppColors.black,
           ),
         ),
         Row(
@@ -37,7 +38,7 @@ AppBar customAppBar(BuildContext context) {
               child: IconButton(
                 icon: SvgPicture.asset(
                   Assets.svgsSearchIcon,
-                  color: isDark ? Colors.white : Colors.black,
+                  color: isDark ? AppColors.white : AppColors.black,
                 ),
                 onPressed: () {},
               ),
@@ -54,9 +55,9 @@ AppBar customAppBar(BuildContext context) {
                   )),
               icon: locale.languageCode == 'ar'
                   ? Icon(Icons.arrow_forward_ios,
-                      color: isDark ? Colors.white : Colors.black)
+                      color: isDark ? AppColors.white : AppColors.black)
                   : Icon(Icons.arrow_back_ios,
-                      color: isDark ? Colors.white : Colors.black),
+                      color: isDark ? AppColors.white : AppColors.black),
               onPressed: () {
                 Navigator.pop(context);
               },

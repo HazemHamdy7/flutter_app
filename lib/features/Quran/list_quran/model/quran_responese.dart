@@ -62,12 +62,35 @@ class Surah {
 }
 
 class Ayah {
-  final int number;
   final String text;
+  final int number;
+  final int numberInSurah;
+  final int juz;
+  final int manzil;
+  final int page;
+  final int ruku;
+  final int hizbQuarter;
+  final bool sajda;
 
-  Ayah({required this.number, required this.text});
-
+  Ayah(
+    this.numberInSurah,
+    this.juz,
+    this.manzil,
+    this.page,
+    this.ruku,
+    this.hizbQuarter,
+    this.sajda, {
+    required this.number,
+    required this.text,
+  });
   factory Ayah.fromJson(Map<String, dynamic> json) => Ayah(
+        json["numberInSurah"],
+        json["juz"],
+        json["manzil"],
+        json["page"],
+        json["ruku"],
+        json["hizbQuarter"],
+        json["sajda"],
         number: json["number"],
         text: json["text"],
       );

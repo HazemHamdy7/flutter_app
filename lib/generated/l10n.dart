@@ -220,11 +220,11 @@ class S {
     );
   }
 
-  /// `Maccan`
-  String get Maccan {
+  /// `Meccan`
+  String get Meccan {
     return Intl.message(
-      'Maccan',
-      name: 'Maccan',
+      'Meccan',
+      name: 'Meccan',
       desc: '',
       args: [],
     );
@@ -235,6 +235,16 @@ class S {
     return Intl.message(
       'Parts',
       name: 'parts',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Page`
+  String get page {
+    return Intl.message(
+      'Page',
+      name: 'page',
       desc: '',
       args: [],
     );

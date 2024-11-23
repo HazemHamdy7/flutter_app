@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/features/choose_language/cubits/language_cubit/language_cubit.dart';
 import 'package:flutter_app/generated/l10n.dart';
+import 'package:flutter_app/utils/helper/app_colors.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_app/features/Quran/view_quran/views/surah_detail_screen.dart';
 import 'package:flutter_app/features/choose_system/cubit/theme_cubit/theme_cubit.dart';
@@ -15,8 +16,8 @@ class ListViewOfQuran extends StatelessWidget {
     return BlocBuilder<ThemeCubit, ThemeState>(
       builder: (context, state) {
         final isDark = state.themeData == ThemeData.dark();
-        final backgroundColor = isDark ? Colors.black : Colors.grey[200];
-        final textColor = isDark ? Colors.white : Colors.black;
+        final backgroundColor = isDark ? AppColors.black : Colors.grey[200];
+        final textColor = isDark ? AppColors.white : AppColors.black;
         final Locale locale = context.read<LanguageCubit>().state;
 
         return ListView.builder(
@@ -25,10 +26,10 @@ class ListViewOfQuran extends StatelessWidget {
             final surah = surahs[index];
             final rowBackgroundColor = index % 2 == 0
                 ? backgroundColor
-                : (isDark ? Colors.grey[600] : Colors.white);
+                : (isDark ? Colors.grey[600] : AppColors.white);
 
             return Container(
-              color: isDark ? Colors.black : rowBackgroundColor,
+              color: isDark ? AppColors.black : rowBackgroundColor,
               child: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 3.0),
                 child: ListTile(
@@ -73,11 +74,7 @@ class ListViewOfQuran extends StatelessWidget {
                           ),
                           Text(
                             textAlign: TextAlign.end,
-                            '${surah.revelationType == 'Meccan' ? {
-                                S.of(context).Maccan
-                              } : {
-                                S.of(context).Madinan
-                              }} - ${S.of(context).ayah}: ${surah.ayahsCount} ',
+                            '${surah.revelationType == 'Meccan' ? S.of(context).Meccan : S.of(context).Madinan} - ${S.of(context).ayah}: ${surah.ayahsCount}',
                             style: TextStyle(color: textColor, fontSize: 12),
                           ),
                         ],
@@ -85,7 +82,7 @@ class ListViewOfQuran extends StatelessWidget {
                       const Spacer(),
                       Text(
                         textAlign: TextAlign.end,
-                        ' صفحه: ${surah.ayahsCount} ',
+                        ' ${S.of(context).page}: ${surah.ayahsCount} ',
                         style: TextStyle(color: textColor, fontSize: 12),
                       ),
                       IconButton(
@@ -100,9 +97,11 @@ class ListViewOfQuran extends StatelessWidget {
                             )),
                         icon: locale.languageCode == 'ar'
                             ? Icon(Icons.arrow_forward_ios,
-                                color: isDark ? Colors.white : Colors.black)
+                                color:
+                                    isDark ? AppColors.white : AppColors.black)
                             : Icon(Icons.arrow_back_ios,
-                                color: isDark ? Colors.white : Colors.black),
+                                color:
+                                    isDark ? AppColors.white : AppColors.black),
                         onPressed: () {
                           Navigator.pop(context);
                         },

@@ -10,5 +10,8 @@ class AppColors {
   static Color white = Colors.white;
   static Color gradient1 = const Color(0xffdf98fa);
   static Color gradient2 = const Color(0xffb070fd);
+  static Color black = Colors.black;
+  static Color whited = Colors.white;
+
   static Color gradient3 = const Color(0xff9055ff);
 }

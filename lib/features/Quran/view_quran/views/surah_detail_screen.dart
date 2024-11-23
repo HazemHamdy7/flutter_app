@@ -5,7 +5,6 @@ import 'package:flutter_app/features/Quran/view_quran/cubit/quran_view_cubit.dar
 import 'package:flutter_app/utils/helper/to_arabic.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class SurahDetailScreen extends StatefulWidget {
   final int surahNumber;
@@ -42,18 +41,18 @@ class _SurahDetailScreenState extends State<SurahDetailScreen> {
     });
   }
 
-  Future<void> _loadFontSize() async {
-    final prefs = await SharedPreferences.getInstance();
-    setState(() {
-      fontSize = prefs.getDouble('fontSize') ??
-          20.0; // Default to 20.0 if no saved size
-    });
-  }
+  // Future<void> _loadFontSize() async {
+  //   final prefs = await SharedPreferences.getInstance();
+  //   setState(() {
+  //     fontSize = prefs.getDouble('fontSize') ??
+  //         20.0; // Default to 20.0 if no saved size
+  //   });
+  // }
 
-  Future<void> _saveFontSize(double size) async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setDouble('fontSize', size);
-  }
+  // Future<void> _saveFontSize(double size) async {
+  //   final prefs = await SharedPreferences.getInstance();
+  //   await prefs.setDouble('fontSize', size);
+  // }
 
   void _scrollToAyah(int ayahNumber) {
     _itemScrollController.scrollTo(
@@ -155,7 +154,7 @@ class _SurahDetailScreenState extends State<SurahDetailScreen> {
                 setState(() {
                   fontSize = newSize;
                 });
-                _saveFontSize(newSize);
+                // _saveFontSize(newSize);
               },
             ),
           ),

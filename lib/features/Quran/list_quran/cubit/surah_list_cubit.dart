@@ -32,8 +32,8 @@ class SurahCubit extends Cubit<List<Surah>> {
       emit(_allSurahs); 
     } else {
       final filtered = _allSurahs.where((surah) {
-        final surahName = surah.name?.toLowerCase() ?? '';
-        final englishName = surah.englishName?.toLowerCase() ?? '';
+        final surahName = surah.name.toLowerCase() ?? '';
+        final englishName = surah.englishName.toLowerCase() ?? '';
         final surahNumber = surah.number.toString();
 
         return surahName.contains(query.toLowerCase()) ||

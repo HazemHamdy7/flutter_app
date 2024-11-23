@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/cubits/language_cubit/language_cubit.dart';
-import 'package:flutter_app/cubits/theme_cubit/theme_cubit.dart';
-import 'package:flutter_app/features/Quran/list_quran/view/surah_list_screen.dart';
+import 'package:flutter_app/features/choose_systom/cubit/theme_cubit/theme_cubit.dart';
+import 'package:flutter_app/features/choose_systom/view/choose_system.dart';
 import 'package:flutter_app/generated/l10n.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -39,7 +39,7 @@ class MyApp extends StatelessWidget {
                   supportedLocales: S.delegate.supportedLocales,
                   title: 'Flutter Demo',
                   theme: themeState.themeData,
-                  home: const SurahListPage());
+                  home: const ChooseSystem());
             },
           );
         },

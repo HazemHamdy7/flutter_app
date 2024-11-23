@@ -3,7 +3,6 @@ import 'package:flutter_app/features/Quran/list_quran/componant/custom_appbar.da
 import 'package:flutter_app/utils/helper/custom_text_field_search.dart';
 import 'package:flutter_app/features/Quran/list_quran/componant/list_view_of_quran.dart';
 import 'package:flutter_app/features/Quran/list_quran/model/quran_responese.dart';
-import 'package:flutter_app/generated/l10n.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_app/features/Quran/list_quran/cubit/surah_list_cubit.dart';
 
@@ -68,5 +67,5 @@ class _SurahListPageState extends State<SurahListPage> {
     );
   }
 
-  // Function to build the ListView
+ 
 }

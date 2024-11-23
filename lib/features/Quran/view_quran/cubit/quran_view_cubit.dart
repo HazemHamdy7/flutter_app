@@ -15,7 +15,7 @@ class SurahDetailCubit extends Cubit<SurahDetail?> {
       final surahDetail = SurahDetail.fromJson(response.data["data"]);
       emit(surahDetail);
     } catch (e) {
-      emit(Text('data not found') as SurahDetail?);
+      emit(const Text('data not found') as SurahDetail?);
     }
   }
 }

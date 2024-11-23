@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/features/Quran/list_quran/view/surah_list_screen.dart';
-import 'package:flutter_app/features/choose_systom/cubit/theme_cubit/theme_cubit.dart';
+import 'package:flutter_app/features/choose_system/cubit/theme_cubit/theme_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ChooseSystem extends StatefulWidget {
@@ -46,18 +46,18 @@ class _ChooseSystemState extends State<ChooseSystem> {
                     'Change Language',
                     style: TextStyle(fontSize: 16),
                   ),
-                  Spacer(),
+                  const Spacer(),
                   Container(
                     margin: const EdgeInsets.all(20),
                     width: double.infinity,
                     decoration: BoxDecoration(
-                      color: Colors.black,
+                      color: isDark ? Colors.white : Colors.black,
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: ElevatedButton(
                       style: ButtonStyle(
-                        backgroundColor:
-                            WidgetStateProperty.all<Color>(Colors.black),
+                        backgroundColor: WidgetStateProperty.all<Color>(
+                            isDark ? Colors.white : Colors.black),
                       ),
                       onPressed: () {
                         Navigator.push(
@@ -67,10 +67,10 @@ class _ChooseSystemState extends State<ChooseSystem> {
                           ),
                         );
                       },
-                      child: const Text(
+                      child: Text(
                         'Go to Quran',
                         style: TextStyle(
-                          color: Colors.white,
+                          color: isDark ? Colors.black : Colors.white,
                           fontSize: 16,
                         ),
                       ),

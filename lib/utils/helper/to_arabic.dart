@@ -1,4 +1,4 @@
-class _ArabicNumber {
+class ArabicNumber {
   static String convert(Object value) {
     assert(
       value is int || value is String,
@@ -28,12 +28,12 @@ class _ArabicNumber {
 
 extension IntExtensions on int {
   String get toArabicNumbers {
-    return _ArabicNumber.convert(this);
+    return ArabicNumber.convert(this);
   }
 }
 
 extension StringExtensions on String {
   String get toArabicNumbers {
-    return _ArabicNumber.convert(this);
+    return ArabicNumber.convert(this);
   }
 }

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/features/choose_language/cubits/language_cubit/language_cubit.dart';
+import 'package:flutter_app/generated/l10n.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_app/features/Quran/view_quran/views/surah_detail_screen.dart';
-import 'package:flutter_app/features/choose_systom/cubit/theme_cubit/theme_cubit.dart';
+import 'package:flutter_app/features/choose_system/cubit/theme_cubit/theme_cubit.dart';
 
 class ListViewOfQuran extends StatelessWidget {
   const ListViewOfQuran({super.key, required this.surahs});
@@ -15,6 +17,7 @@ class ListViewOfQuran extends StatelessWidget {
         final isDark = state.themeData == ThemeData.dark();
         final backgroundColor = isDark ? Colors.black : Colors.grey[200];
         final textColor = isDark ? Colors.white : Colors.black;
+        final Locale locale = context.read<LanguageCubit>().state;
 
         return ListView.builder(
           itemCount: surahs.length,
@@ -22,13 +25,12 @@ class ListViewOfQuran extends StatelessWidget {
             final surah = surahs[index];
             final rowBackgroundColor = index % 2 == 0
                 ? backgroundColor
-                : (isDark ? Colors.grey[800] : Colors.white);
+                : (isDark ? Colors.grey[600] : Colors.white);
 
             return Container(
-              color: rowBackgroundColor,
+              color: isDark ? Colors.black : rowBackgroundColor,
               child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 3.0, horizontal: 8.0),
+                padding: const EdgeInsets.symmetric(vertical: 3.0),
                 child: ListTile(
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10),
@@ -64,17 +66,46 @@ class ListViewOfQuran extends StatelessWidget {
                             surah.englishName,
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
-                              fontSize: 16,
+                              fontSize: 14,
                               fontFamily: "me_quran",
                               color: textColor,
                             ),
                           ),
+                          Text(
+                            textAlign: TextAlign.end,
+                            '${surah.revelationType == 'Meccan' ? {
+                                S.of(context).Maccan
+                              } : {
+                                S.of(context).Madinan
+                              }} - ${S.of(context).ayah}: ${surah.ayahsCount} ',
+                            style: TextStyle(color: textColor, fontSize: 12),
+                          ),
                         ],
                       ),
+                      const Spacer(),
                       Text(
                         textAlign: TextAlign.end,
-                        ' ${surah.ayahsCount} - أيــة: ${surah.revelationType} ',
-                        style: TextStyle(color: textColor),
+                        ' صفحه: ${surah.ayahsCount} ',
+                        style: TextStyle(color: textColor, fontSize: 12),
+                      ),
+                      IconButton(
+                        style: ButtonStyle(
+                            backgroundColor: WidgetStateProperty.all<Color>(
+                                isDark ? Colors.grey[800]! : Colors.amber),
+                            shape:
+                                WidgetStateProperty.all<RoundedRectangleBorder>(
+                              RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                            )),
+                        icon: locale.languageCode == 'ar'
+                            ? Icon(Icons.arrow_forward_ios,
+                                color: isDark ? Colors.white : Colors.black)
+                            : Icon(Icons.arrow_back_ios,
+                                color: isDark ? Colors.white : Colors.black),
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
                       ),
                     ],
                   ),

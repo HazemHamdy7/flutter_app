@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/features/choose_systom/cubit/theme_cubit/theme_cubit.dart';
+import 'package:flutter_app/features/choose_system/cubit/theme_cubit/theme_cubit.dart';
 
 import 'package:flutter_app/generated/l10n.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

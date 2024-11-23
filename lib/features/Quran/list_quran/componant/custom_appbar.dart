@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/constants/assets.dart';
+import 'package:flutter_app/features/choose_language/cubits/language_cubit/language_cubit.dart';
 import 'package:flutter_app/generated/l10n.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_app/features/choose_systom/cubit/theme_cubit/theme_cubit.dart';
+import 'package:flutter_app/features/choose_system/cubit/theme_cubit/theme_cubit.dart';
 
 AppBar customAppBar(BuildContext context) {
   final themeCubit = context.read<ThemeCubit>();
   final isDark = themeCubit.state.themeData == ThemeData.dark();
+  final Locale locale = context.read<LanguageCubit>().state;
 
   return AppBar(
     centerTitle: true,
@@ -41,24 +43,23 @@ AppBar customAppBar(BuildContext context) {
               ),
             ),
             const SizedBox(width: 10),
-            Container(
-              height: 30,
-              width: 30,
-              decoration: BoxDecoration(
-                color: isDark
-                    ? const Color.fromARGB(255, 202, 152, 3)
-                    : const Color.fromARGB(255, 202, 152, 3), // Dynamic color
-                borderRadius: BorderRadius.circular(5),
-              ),
-              child: IconButton(
-                icon: isDark
-                    ? const Icon(Icons.arrow_forward_ios, color: Colors.white)
-                    : Icon(Icons.arrow_back_ios,
-                        color: isDark ? Colors.white : null),
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-              ),
+            IconButton(
+              style: ButtonStyle(
+                  backgroundColor: WidgetStateProperty.all<Color>(
+                      isDark ? Colors.grey[800]! : Colors.amber),
+                  shape: WidgetStateProperty.all<RoundedRectangleBorder>(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  )),
+              icon: locale.languageCode == 'ar'
+                  ? Icon(Icons.arrow_forward_ios,
+                      color: isDark ? Colors.white : Colors.black)
+                  : Icon(Icons.arrow_back_ios,
+                      color: isDark ? Colors.white : Colors.black),
+              onPressed: () {
+                Navigator.pop(context);
+              },
             ),
           ],
         )

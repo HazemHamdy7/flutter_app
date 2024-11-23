@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/constants/assets.dart';
 import 'package:flutter_app/features/choose_language/cubits/language_cubit/language_cubit.dart';
 import 'package:flutter_app/generated/l10n.dart';
-import 'package:flutter_app/utils/helper/app_colors.dart';
+import 'package:flutter_app/constants/app_colors.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_app/features/Quran/view_quran/views/surah_detail_screen.dart';
 import 'package:flutter_app/features/choose_system/cubit/theme_cubit/theme_cubit.dart';
+import 'package:flutter_svg/svg.dart';
 
 class ListViewOfQuran extends StatelessWidget {
   const ListViewOfQuran({super.key, required this.surahs});
@@ -72,10 +74,22 @@ class ListViewOfQuran extends StatelessWidget {
                               color: textColor,
                             ),
                           ),
-                          Text(
-                            textAlign: TextAlign.end,
-                            '${surah.revelationType == 'Meccan' ? S.of(context).Meccan : S.of(context).Madinan} - ${S.of(context).ayah}: ${surah.ayahsCount}',
-                            style: TextStyle(color: textColor, fontSize: 12),
+                          Row(
+                            children: [
+                              SvgPicture.asset(
+                                Assets.svgsLampIcon,
+                                height: 20,
+                                color: isDark
+                                    ? AppColors.white
+                                    : const Color.fromARGB(255, 185, 168, 9),
+                              ),
+                              Text(
+                                textAlign: TextAlign.end,
+                                '${surah.revelationType == 'Meccan' ? S.of(context).Meccan : S.of(context).Medinan} - ${S.of(context).ayah}: ${surah.ayahsCount}',
+                                style:
+                                    TextStyle(color: textColor, fontSize: 12),
+                              ),
+                            ],
                           ),
                         ],
                       ),
@@ -87,14 +101,14 @@ class ListViewOfQuran extends StatelessWidget {
                       ),
                       IconButton(
                         style: ButtonStyle(
-                            backgroundColor: WidgetStateProperty.all<Color>(
-                                isDark ? Colors.grey[800]! : Colors.amber),
+                            // backgroundColor: WidgetStateProperty.all<Color>(
+                            //     isDark ? Colors.grey[800]! : Colors.amber),
                             shape:
                                 WidgetStateProperty.all<RoundedRectangleBorder>(
-                              RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                            )),
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                        )),
                         icon: locale.languageCode == 'ar'
                             ? Icon(Icons.arrow_forward_ios,
                                 color:

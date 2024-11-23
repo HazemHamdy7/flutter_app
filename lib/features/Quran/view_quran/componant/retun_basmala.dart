@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/utils/helper/custom_text.dart';
+import 'package:flutter_app/widgets/custom_text.dart';
 
 class RetunBasmala extends StatelessWidget {
   const RetunBasmala({super.key});

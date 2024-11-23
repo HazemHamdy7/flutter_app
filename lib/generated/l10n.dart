@@ -210,11 +210,11 @@ class S {
     );
   }
 
-  /// `Madinan`
-  String get Madinan {
+  /// `Medinan`
+  String get Medinan {
     return Intl.message(
-      'Madinan',
-      name: 'Madinan',
+      'Medinan',
+      name: 'Medinan',
       desc: '',
       args: [],
     );

@@ -24,10 +24,11 @@ class MessageLookup extends MessageLookupByLibrary {
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "Fuhras": MessageLookupByLibrary.simpleMessage("فهرس السور"),
         "Meccan": MessageLookupByLibrary.simpleMessage("مكية"),
+        "Medinan": MessageLookupByLibrary.simpleMessage("مديـنة"),
         "Number": MessageLookupByLibrary.simpleMessage("الرقم"),
         "about": MessageLookupByLibrary.simpleMessage("عننا"),
         "address": MessageLookupByLibrary.simpleMessage("العنوان"),
-        "ayah": MessageLookupByLibrary.simpleMessage("آيـة"),
+        "ayah": MessageLookupByLibrary.simpleMessage("أياتها"),
         "email": MessageLookupByLibrary.simpleMessage("البريد الإلكتروني"),
         "error_message": MessageLookupByLibrary.simpleMessage("رسالة الخطأ"),
         "login": MessageLookupByLibrary.simpleMessage("تسجيل الدخول"),

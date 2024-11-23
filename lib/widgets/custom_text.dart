@@ -11,7 +11,6 @@ class CustomText extends StatelessWidget {
     required Color color,
   });
 
-  
   final String text;
   final String? fontFamily;
   double? fontSize;

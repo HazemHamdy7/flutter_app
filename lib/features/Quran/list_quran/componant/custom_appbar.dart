@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/constants/assets.dart';
 import 'package:flutter_app/features/choose_language/cubits/language_cubit/language_cubit.dart';
 import 'package:flutter_app/generated/l10n.dart';
-import 'package:flutter_app/utils/helper/app_colors.dart';
+import 'package:flutter_app/constants/app_colors.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_app/features/choose_system/cubit/theme_cubit/theme_cubit.dart';
@@ -32,7 +32,9 @@ AppBar customAppBar(BuildContext context) {
               height: 30,
               width: 30,
               decoration: BoxDecoration(
-                color: isDark ? Colors.grey[800] : Colors.amber,
+                color: isDark
+                    ? Colors.grey[800]
+                    : const Color.fromARGB(255, 238, 207, 113),
                 borderRadius: BorderRadius.circular(5),
               ),
               child: IconButton(
@@ -46,13 +48,13 @@ AppBar customAppBar(BuildContext context) {
             const SizedBox(width: 10),
             IconButton(
               style: ButtonStyle(
-                  backgroundColor: WidgetStateProperty.all<Color>(
-                      isDark ? Colors.grey[800]! : Colors.amber),
+                  // backgroundColor: WidgetStateProperty.all<Color>(
+                  //     isDark ? Colors.grey[800]! : Colors.amber),
                   shape: WidgetStateProperty.all<RoundedRectangleBorder>(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                  )),
+                RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              )),
               icon: locale.languageCode == 'ar'
                   ? Icon(Icons.arrow_forward_ios,
                       color: isDark ? AppColors.white : AppColors.black)
@@ -73,9 +75,11 @@ AppBar customAppBar(BuildContext context) {
       splashBorderRadius: BorderRadius.circular(50),
       indicatorSize: TabBarIndicatorSize.tab,
       labelPadding: const EdgeInsets.symmetric(horizontal: 20.0),
-      labelColor: isDark
-          ? Colors.amber
-          : const Color.fromARGB(255, 223, 169, 7), // Dynamic label color
+      labelColor: isDark ? Colors.white : Colors.black,
+      labelStyle: const TextStyle(
+        fontWeight: FontWeight.bold,
+        fontSize: 16,
+      ), // Dynamic label color
       unselectedLabelColor: isDark ? Colors.grey[400] : Colors.grey,
       indicatorColor:
           isDark ? Colors.amber : Colors.indigo, // Dynamic indicator color

@@ -3,7 +3,7 @@ import 'package:flutter_app/constants/app_colors.dart';
 import 'package:flutter_app/constants/assets.dart';
 import 'package:flutter_app/features/Quran/list_quran/model/quran_responese.dart';
 import 'package:flutter_app/features/Quran/list_quran/model/surah_detail.dart';
-import 'package:flutter_app/features/Quran/view_quran/componant/retun_basmala.dart';
+import 'package:flutter_app/features/Quran/view_quran/componant/custom_drawer.dart';
 import 'package:flutter_app/features/Quran/view_quran/cubit/quran_view_cubit.dart';
 import 'package:flutter_app/features/choose_system/cubit/theme_cubit/theme_cubit.dart';
 import 'package:flutter_app/utils/helper/to_arabic.dart';
@@ -75,6 +75,7 @@ class _SurahDetailScreenState extends State<SurahDetailScreen> {
     final isDark = themeCubit.state.themeData == ThemeData.dark();
     return Scaffold(
       backgroundColor: isDark ? AppColors.black : AppColors.white,
+      drawer: CustomDrawer(),
       appBar: AppBar(
         backgroundColor: isDark ? AppColors.black : AppColors.white,
         leading: Tooltip(

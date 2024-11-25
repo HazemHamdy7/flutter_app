@@ -42,10 +42,6 @@ class _ChooseSystemState extends State<ChooseSystem> {
                     activeTrackColor: Colors.white,
                   ),
                   const SizedBox(height: 20),
-                  const Text(
-                    'Change Language',
-                    style: TextStyle(fontSize: 16),
-                  ),
                   const Spacer(),
                   Container(
                     margin: const EdgeInsets.all(20),

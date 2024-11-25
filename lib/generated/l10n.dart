@@ -249,6 +249,32 @@ class S {
       args: [],
     );
   }
+
+  // skipped getter for the 'The view of the Quran' key
+
+  // skipped getter for the 'Horizontal Qur\'an\'' key
+
+  // skipped getter for the 'Vertical Qur\'an\'' key
+
+  /// `Quran`
+  String get Quran {
+    return Intl.message(
+      'Quran',
+      name: 'Quran',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Index`
+  String get Index {
+    return Intl.message(
+      'Index',
+      name: 'Index',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

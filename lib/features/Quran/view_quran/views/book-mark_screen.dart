@@ -12,7 +12,7 @@ class BookmarkListScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Bookmarks')),
+      appBar: AppBar(title: Text(S.of(context).Bookmark)),
       body: BlocBuilder<BookmarkCubit, List<Bookmark>>(
         builder: (context, bookmarks) {
           if (bookmarks.isEmpty) {
@@ -45,9 +45,14 @@ class BookmarkListScreen extends StatelessWidget {
                       maxLines: 1,
                       '${bookmark.surahName} - ${S.of(context).ayah} ${bookmark.ayahNumber.toArabicNumbers}',
                     ),
-                    subtitle: Text(bookmark.ayahText),
+                    subtitle: Text(
+                      bookmark.ayahText,
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 1,
+                    ),
                     onTap: () {
-                       Navigator.push(
+                      // Navigate to SurahDetailScreen and pass the bookmark data
+                      Navigator.push(
                         context,
                         MaterialPageRoute(
                           builder: (context) => SurahDetailScreen(
@@ -57,6 +62,17 @@ class BookmarkListScreen extends StatelessWidget {
                         ),
                       );
                     },
+                    trailing: IconButton(
+                      icon: const Icon(Icons.close, color: Colors.black),
+                      onPressed: () {
+                        context.read<BookmarkCubit>().removeBookmark(bookmark);
+
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                              content: Text(S.of(context).Bookmark_removed)),
+                        );
+                      },
+                    ),
                   ),
                 ),
               );

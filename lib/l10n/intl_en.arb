@@ -22,5 +22,9 @@
   "The view of the Quran": "The view of the Quran",
   "Horizontal Qur'an'": "  'Horizontal Qur'an'",
   "Vertical Qur'an'": "  'Vertical Qur'an'",
-  "Quran": "Quran" , "Index": "Index"
+  "Quran": "Quran",
+  "Index": "Index",
+  "Bookmark_removed": "Bookmark removed!",
+  "Bookmark_added": "Bookmark added!",
+  "Bookmark": "Bookmark"
 }

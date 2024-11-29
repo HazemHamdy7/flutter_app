@@ -23,5 +23,8 @@
   "Horizontal Qur'an'": "المصحف الأفقي",
   "Vertical Qur'an'": "المصحف الرأسى",
   "Quran": "المصحف",
-  "Index": "الفهرس"
+  "Index": "الفهرس",
+  "Bookmark_removed": "تم حذف العلامة المرجعية",
+  "Bookmark_added": "تم اضافة العلامة المرجعية",
+  "Bookmark": "العلامة المرجعية"
 }

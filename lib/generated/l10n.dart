@@ -275,6 +275,36 @@ class S {
       args: [],
     );
   }
+
+  /// `Bookmark removed!`
+  String get Bookmark_removed {
+    return Intl.message(
+      'Bookmark removed!',
+      name: 'Bookmark_removed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Bookmark added!`
+  String get Bookmark_added {
+    return Intl.message(
+      'Bookmark added!',
+      name: 'Bookmark_added',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Bookmark`
+  String get Bookmark {
+    return Intl.message(
+      'Bookmark',
+      name: 'Bookmark',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

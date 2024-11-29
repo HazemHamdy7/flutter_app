@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_app/constants/app_colors.dart';
 import 'package:flutter_app/constants/assets.dart';
 import 'package:flutter_app/features/Quran/list_quran/model/quran_responese.dart';
@@ -11,8 +12,10 @@ import 'package:flutter_app/features/Quran/view_quran/cubit/surah_details/surah_
 import 'package:flutter_app/features/Quran/view_quran/model/book_mark_model.dart';
 import 'package:flutter_app/features/Quran/view_quran/views/book-mark_screen.dart';
 import 'package:flutter_app/features/choose_system/cubit/theme_cubit/theme_cubit.dart';
+import 'package:flutter_app/generated/l10n.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
+import 'package:share_plus/share_plus.dart';
 
 class SurahDetailScreen extends StatefulWidget {
   final int surahNumber;
@@ -193,7 +196,7 @@ void onLongPress(
             children: [
               ListTile(
                 leading: const Icon(Icons.bookmark),
-                title: const Text('إضافة إلى الإشارات المرجعية'),
+                title: Text(S.of(context).Bookmark_added),
                 onTap: () {
                   final bookmarkCubit = context.read<BookmarkCubit>();
 
@@ -216,6 +219,30 @@ void onLongPress(
                   );
 
                   // Close the modal
+                  Navigator.pop(context);
+                },
+              ),
+              ListTile(
+                leading: const Icon(Icons.copy),
+                title: const Text('نسخ'),
+                onTap: () {
+                  Clipboard.setData(ClipboardData(text: ayah.text));
+                  Navigator.pop(context);
+                },
+              ),
+              ListTile(
+                leading: const Icon(Icons.share),
+                title: const Text('مشاركة'),
+                onTap: () {
+                  Share.share(ayah.text);
+                  Navigator.pop(context);
+                },
+              ),
+              ListTile(
+                leading: const Icon(Icons.music_note),
+                title: const Text('استماع'),
+                onTap: () {
+                  // Perform action to play audio
                   Navigator.pop(context);
                 },
               ),

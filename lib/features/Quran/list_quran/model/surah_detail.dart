@@ -21,8 +21,8 @@ class SurahDetail {
 }
 
 class AyahDetail {
-  final int numberInSurah;
-  final String text;
+  late final int numberInSurah;
+  late final String text;
 
   AyahDetail({
     required this.numberInSurah,

@@ -14,7 +14,7 @@ AppBar customAppBar(BuildContext context) {
 
   return AppBar(
     centerTitle: true,
-    automaticallyImplyLeading: true,
+    automaticallyImplyLeading: false,
 
     title: Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,

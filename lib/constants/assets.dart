@@ -49,4 +49,5 @@ class Assets {
   /// Assets for svgsSplash
   /// assets/svgs/splash.svg
   static const String svgsSplash = "assets/svgs/splash.svg";
+  static const String imageBorder = 'assets/image/888-02.png';
 }

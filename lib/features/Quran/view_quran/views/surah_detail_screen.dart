@@ -3,12 +3,15 @@ import 'package:flutter_app/constants/app_colors.dart';
 import 'package:flutter_app/constants/assets.dart';
 import 'package:flutter_app/features/Quran/list_quran/model/quran_responese.dart';
 import 'package:flutter_app/features/Quran/list_quran/model/surah_detail.dart';
+import 'package:flutter_app/features/Quran/view_quran/componant/List_view_quran.dart';
 import 'package:flutter_app/features/Quran/view_quran/componant/custom_drawer.dart';
-import 'package:flutter_app/features/Quran/view_quran/cubit/quran_view_cubit.dart';
+import 'package:flutter_app/features/Quran/view_quran/componant/list_tile_view_surah.dart';
+import 'package:flutter_app/features/Quran/view_quran/cubit/book_mark/book_mark_cubit.dart';
+import 'package:flutter_app/features/Quran/view_quran/cubit/surah_details/surah_details_cubit.dart';
+import 'package:flutter_app/features/Quran/view_quran/model/book_mark_model.dart';
+import 'package:flutter_app/features/Quran/view_quran/views/book-mark_screen.dart';
 import 'package:flutter_app/features/choose_system/cubit/theme_cubit/theme_cubit.dart';
-import 'package:flutter_app/utils/helper/to_arabic.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
 class SurahDetailScreen extends StatefulWidget {
@@ -37,8 +40,6 @@ class _SurahDetailScreenState extends State<SurahDetailScreen> {
   void initState() {
     super.initState();
     _itemScrollController = ItemScrollController();
-    // _loadFontSize(); // Load saved font size
-
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (widget.initialAyahNumber != null) {
         Future.delayed(const Duration(milliseconds: 200), () {
@@ -48,22 +49,9 @@ class _SurahDetailScreenState extends State<SurahDetailScreen> {
     });
   }
 
-  // Future<void> _loadFontSize() async {
-  //   final prefs = await SharedPreferences.getInstance();
-  //   setState(() {
-  //     fontSize = prefs.getDouble('fontSize') ??
-  //         20.0; // Default to 20.0 if no saved size
-  //   });
-  // }
-
-  // Future<void> _saveFontSize(double size) async {
-  //   final prefs = await SharedPreferences.getInstance();
-  //   await prefs.setDouble('fontSize', size);
-  // }
-
   void _scrollToAyah(int ayahNumber) {
     _itemScrollController.scrollTo(
-      index: ayahNumber - 1,
+      index: ayahNumber - 1, // Adjust to 0-based index
       duration: const Duration(seconds: 1),
       curve: Curves.easeInOut,
     );
@@ -73,42 +61,55 @@ class _SurahDetailScreenState extends State<SurahDetailScreen> {
   Widget build(BuildContext context) {
     final themeCubit = context.read<ThemeCubit>();
     final isDark = themeCubit.state.themeData == ThemeData.dark();
+
     return Scaffold(
       backgroundColor: isDark ? AppColors.black : AppColors.white,
-      drawer: CustomDrawer(),
+      drawer: const CustomDrawer(),
       appBar: AppBar(
         backgroundColor: isDark ? AppColors.black : AppColors.white,
-        leading: Tooltip(
-          message: 'Toggle View',
-          child: IconButton(
-            icon: SvgPicture.asset(
-              Assets.svgsQuran,
-            ),
-            onPressed: () {
-              setState(() {
-                view = !view;
-              });
-            },
-          ),
-        ),
-        title: Text(
-          surahName.isNotEmpty ? surahName : "...جاري التحميل",
-          style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-        ),
         actions: [
           IconButton(
             icon: const Icon(Icons.bookmark),
-            onPressed: () {},
-          ),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => BookmarkListScreen(),
+                ),
+              );
+            },
+          )
         ],
         centerTitle: true,
       ),
       body: Column(
         children: [
+          Stack(
+            children: [
+              Positioned(
+                right: 145,
+                top: 5,
+                child: Text(
+                  surahName.isNotEmpty ? surahName : "جاري التحميل",
+                  style: const TextStyle(
+                      fontSize: 20, fontWeight: FontWeight.bold),
+                ),
+              ),
+              Image.asset(
+                Assets.imageBorder,
+                fit: BoxFit.cover,
+              ),
+            ],
+          ),
           Expanded(
-            child: BlocProvider(
-              create: (context) =>
-                  SurahDetailCubit()..fetchSurahDetail(widget.surahNumber),
+            child: MultiBlocProvider(
+              providers: [
+                BlocProvider(
+                  create: (context) =>
+                      SurahDetailCubit()..fetchSurahDetail(widget.surahNumber),
+                ),
+                BlocProvider(create: (context) => BookmarkCubit()),
+              ],
               child: BlocBuilder<SurahDetailCubit, SurahDetail?>(
                 builder: (context, surahDetail) {
                   if (surahDetail == null) {
@@ -124,8 +125,8 @@ class _SurahDetailScreenState extends State<SurahDetailScreen> {
                   }
 
                   return view
-                      ? _buildFullView(surahDetail)
-                      : _buildListTileView(surahDetail);
+                      ? ListTileViewSurah(surahDetail: surahDetail)
+                      : ListViewQuran(surahDetail: surahDetail);
                 },
               ),
             ),
@@ -163,7 +164,6 @@ class _SurahDetailScreenState extends State<SurahDetailScreen> {
                 setState(() {
                   fontSize = newSize;
                 });
-                // _saveFontSize(newSize);
               },
             ),
           ),
@@ -179,184 +179,49 @@ class _SurahDetailScreenState extends State<SurahDetailScreen> {
       ),
     );
   }
-
-  Widget _buildFullView(SurahDetail surahDetail) {
-    final themeCubit = context.read<ThemeCubit>();
-    final isDark = themeCubit.state.themeData == ThemeData.dark();
-    const int ayahsPerPage = 10;
-
-    final pages = List.generate(
-      (surahDetail.ayahs.length / ayahsPerPage).ceil(),
-      (pageIndex) {
-        final start = pageIndex * ayahsPerPage;
-        final end = (start + ayahsPerPage).clamp(0, surahDetail.ayahs.length);
-        final ayahsForPage = surahDetail.ayahs.sublist(start, end);
-
-        return ayahsForPage;
-      },
-    );
-
-    return PageView.builder(
-      itemCount: pages.length,
-      itemBuilder: (context, index) {
-        final ayahs = pages[index];
-        return Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: ayahs.map((ayah) {
-                return Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8.0),
-                  child: GestureDetector(
-                    onTap: () => _onLongPress(context, surahDetail, ayah),
-                    child: RichText(
-                      textAlign: TextAlign.center,
-                      text: TextSpan(
-                        style: TextStyle(
-                          fontSize: fontSize,
-                          color: isDark ? Colors.white : Colors.black,
-                        ),
-                        children: [
-                          TextSpan(text: ayah.text.trim()),
-                          TextSpan(
-                            text:
-                                '\uFD3F${ayah.numberInSurah.toString().trim().toArabicNumbers}\uFD3E',
-                            style: const TextStyle(
-                              fontFamily: 'me_quran',
-                              fontSize: 24,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                );
-              }).toList(),
-            ),
-          ),
-        );
-      },
-    );
-  }
-
-  Widget _buildListTileView(SurahDetail surahDetail) {
-    final themeCubit = context.read<ThemeCubit>();
-    final isDark = themeCubit.state.themeData == ThemeData.dark();
-
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: ListView.builder(
-        shrinkWrap: true,
-        // physics: const NeverScrollableScrollPhysics(),
-        itemCount: surahDetail.ayahs.length,
-        itemBuilder: (context, index) {
-          final ayah = surahDetail.ayahs[index];
-          final backgroundColor = index % 2 == 0
-              ? (isDark ? Colors.grey[800] : Colors.grey[200])
-              : (isDark ? Colors.black : Colors.white);
-
-          return Container(
-            decoration: BoxDecoration(
-              color: backgroundColor,
-              borderRadius: BorderRadius.circular(8.0),
-            ),
-            margin: const EdgeInsets.symmetric(vertical: 4.0),
-            child: ListTile(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(8.0),
-              ),
-              contentPadding: const EdgeInsets.symmetric(vertical: 8.0),
-              title: RichText(
-                text: TextSpan(
-                  style: TextStyle(
-                      fontSize: fontSize,
-                      color: isDark ? Colors.white : Colors.black),
-                  children: [
-                    TextSpan(text: ayah.text.trim()),
-                    TextSpan(
-                      text:
-                          '\uFD3F${ayah.numberInSurah.toString().toArabicNumbers}\uFD3E',
-                      style: const TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: 'me_quran'),
-                    ),
-                  ],
-                ),
-              ),
-              onTap: () => _onLongPress(context, surahDetail, ayah),
-            ),
-          );
-        },
-      ),
-    );
-  }
 }
 
-void _onLongPress(
+void onLongPress(
     BuildContext context, SurahDetail surahDetail, AyahDetail ayah) {
   showModalBottomSheet(
     context: context,
-    builder: (context) {
-      return Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            ListTile(
-              trailing: const Icon(Icons.bookmark),
-              title: const Text(
-                textAlign: TextAlign.end,
-                'أضافة آشاره مرجعية',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-              ),
-              onTap: () {
-                // final bookmark = Bookmark(
-                //   surahNumber: surahDetail.number,
-                //   ayahNumber: ayah.numberInSurah,
-                //   surahName: surahDetail.name,
-                //   ayahText: ayah.text,
-                // );
+    builder: (bottomSheetContext) {
+      return Builder(
+        builder: (context) {
+          return Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              ListTile(
+                leading: const Icon(Icons.bookmark),
+                title: const Text('إضافة إلى الإشارات المرجعية'),
+                onTap: () {
+                  final bookmarkCubit = context.read<BookmarkCubit>();
 
-                // context.read<BookmarkCubit>().addBookmark(bookmark);
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                      backgroundColor: Colors.indigoAccent,
-                      content: Text(
-                        'تمت اضافة الآية المرجعية للمفضلة',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 16,
-                        ),
-                      )),
-                );
-                Navigator.pop(context); // Close the modal sheet
-              },
-            ),
-            ListTile(
-              trailing: const Icon(Icons.menu_book_sharp),
-              title: const Text(
-                textAlign: TextAlign.end,
-                'تفسير',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                  // Create a bookmark object
+                  final bookmark = Bookmark(
+                    surahNumber: surahDetail.number,
+                    ayahNumber: ayah.numberInSurah,
+                    surahName: surahDetail.name,
+                    ayahText: ayah.text,
+                  );
+
+                  // Add the bookmark
+                  bookmarkCubit.addBookmark(bookmark);
+
+                  // Show confirmation message
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                        content:
+                            Text('تمت إضافة الآية إلى الإشارات المرجعية!')),
+                  );
+
+                  // Close the modal
+                  Navigator.pop(context);
+                },
               ),
-              onTap: () {
-                // Add bookmark
-              },
-            ),
-            ListTile(
-              trailing: const Icon(Icons.music_note),
-              title: const Text(
-                textAlign: TextAlign.end,
-                'استماع',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-              ),
-              onTap: () {},
-            ),
-            // Add more options here if needed
-          ],
-        ),
+            ],
+          );
+        },
       );
     },
   );

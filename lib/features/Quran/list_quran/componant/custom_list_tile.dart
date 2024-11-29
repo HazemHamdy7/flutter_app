@@ -5,13 +5,15 @@ class CustomListTile extends StatelessWidget {
   final IconData? icon;
   final Widget? trailing;
   final bool isHeader;
+  Color? color;
   final void Function()? onTap;
 
-  const CustomListTile({
+  CustomListTile({
     super.key,
     required this.title,
     this.icon,
     this.trailing,
+    this.color,
     this.onTap,
     this.isHeader = false, // Default value for isHeader
   });
@@ -26,7 +28,7 @@ class CustomListTile extends StatelessWidget {
         title: Text(
           title,
           style: TextStyle(
-            color: isHeader ? Colors.grey : Colors.white,
+            color: color,
             fontSize: isHeader ? 14 : 16,
             fontWeight: isHeader ? FontWeight.bold : FontWeight.normal,
           ),

@@ -1,11 +1,13 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:flutter_app/constants/assets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:flutter_app/features/Quran/list_quran/model/surah_detail.dart';
 import 'package:flutter_app/features/Quran/view_quran/views/surah_detail_screen.dart';
 import 'package:flutter_app/features/choose_system/cubit/theme_cubit/theme_cubit.dart';
 import 'package:flutter_app/utils/helper/to_arabic.dart';
+import 'package:flutter_svg/svg.dart';
 
 class ListTileViewSurah extends StatefulWidget {
   final SurahDetail surahDetail;
@@ -47,17 +49,48 @@ class _ListTileViewSurahState extends State<ListTileViewSurah> {
               title: RichText(
                 text: TextSpan(
                   style: TextStyle(
-                      fontSize: fontSize,
-                      color: isDark ? Colors.white : Colors.black),
+                    fontSize: fontSize,
+                    color: isDark ? Colors.white : Colors.black,
+                  ),
                   children: [
-                    TextSpan(text: ayah.text.trim()),
                     TextSpan(
-                      text:
-                          "\uFD3F${ayah.numberInSurah.toString().toArabicNumbers}\uFD3E",
-                      style: const TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: 'me_quran'),
+                      text: ayah.text.trim(),
+                    ),
+                    WidgetSpan(
+                      alignment: PlaceholderAlignment.middle,
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Center(
+                            child: Stack(
+                              children: [
+                                SizedBox(
+                                  height: 30,
+                                  width: 30,
+                                  child: SvgPicture.asset(
+                                    color: Colors.indigo,
+                                    Assets.svgsNomorSurah,
+                                  ),
+                                ),
+                                SizedBox(
+                                    height: 30,
+                                    width: 30,
+                                    child: Center(
+                                      child: Expanded(
+                                        child: Text(
+                                          style: const TextStyle(
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                          ayah.numberInSurah.toArabicNumbers,
+                                        ),
+                                      ),
+                                    )),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ],
                 ),

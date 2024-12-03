@@ -44,10 +44,10 @@ class CustomDrawer extends StatelessWidget {
                     child: OutlinedButton(
                       onPressed: () {},
                       style: OutlinedButton.styleFrom(
-                        side:   BorderSide(color: AppColors.white),
+                        side: BorderSide(color: AppColors.white),
                         backgroundColor: Colors.black87,
                       ),
-                      child:   Text(
+                      child: Text(
                         'المصحف الأفقي',
                         style: TextStyle(color: AppColors.white),
                       ),
@@ -58,10 +58,10 @@ class CustomDrawer extends StatelessWidget {
                     child: OutlinedButton(
                       onPressed: () {},
                       style: OutlinedButton.styleFrom(
-                        side:   BorderSide(color: AppColors.white),
+                        side: BorderSide(color: AppColors.white),
                         backgroundColor: Colors.black87,
                       ),
-                      child:   Text(
+                      child: Text(
                         'المصحف الرأسي',
                         style: TextStyle(color: AppColors.white),
                       ),
@@ -128,7 +128,8 @@ class CustomDrawer extends StatelessWidget {
                         context.read<ThemeCubit>().toggleTheme(value); //
                       },
                       activeColor: isDark ? AppColors.black : AppColors.black,
-                      inactiveThumbColor: isDark ? AppColors.white : AppColors.black,
+                      inactiveThumbColor:
+                          isDark ? AppColors.white : AppColors.black,
                       inactiveTrackColor: AppColors.white,
                       activeTrackColor: AppColors.white,
                     ));

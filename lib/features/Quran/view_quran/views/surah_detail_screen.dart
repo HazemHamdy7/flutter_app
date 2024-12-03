@@ -15,7 +15,6 @@ import 'package:flutter_app/features/choose_system/cubit/theme_cubit/theme_cubit
 import 'package:flutter_app/generated/l10n.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
-import 'package:share_plus/share_plus.dart';
 
 class SurahDetailScreen extends StatefulWidget {
   final int surahNumber;
@@ -30,7 +29,7 @@ class SurahDetailScreen extends StatefulWidget {
   });
 
   @override
-  _SurahDetailScreenState createState() => _SurahDetailScreenState();
+  State<SurahDetailScreen> createState() => _SurahDetailScreenState();
 }
 
 class _SurahDetailScreenState extends State<SurahDetailScreen> {
@@ -77,7 +76,7 @@ class _SurahDetailScreenState extends State<SurahDetailScreen> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => BookmarkListScreen(),
+                  builder: (context) => const BookmarkListScreen(),
                 ),
               );
             },
@@ -152,7 +151,7 @@ class _SurahDetailScreenState extends State<SurahDetailScreen> {
             "الحجم:",
             style: TextStyle(
               fontWeight: FontWeight.w500,
-              fontSize: 16.0,
+              fontSize: fontSize,
               color: isDark ? AppColors.white : AppColors.black,
             ),
           ),
@@ -233,10 +232,7 @@ void onLongPress(
               ListTile(
                 leading: const Icon(Icons.share),
                 title: const Text('مشاركة'),
-                onTap: () {
-                  Share.share(ayah.text);
-                  Navigator.pop(context);
-                },
+                onTap: () {},
               ),
               ListTile(
                 leading: const Icon(Icons.music_note),

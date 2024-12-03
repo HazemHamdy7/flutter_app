@@ -1,4 +1,4 @@
-import 'package:flutter_app/features/Quran/view_quran/model/book_mark_model.dart';
+import 'package:flutter_app/features/Quran/book_mark/model/book_mark_model.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class BookmarkCubit extends Cubit<List<Bookmark>> {

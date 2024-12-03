@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/features/Quran/view_quran/cubit/book_mark/book_mark_cubit.dart';
-import 'package:flutter_app/features/Quran/view_quran/model/book_mark_model.dart';
+import 'package:flutter_app/features/Quran/book_mark/cubit/book_mark_cubit.dart';
+import 'package:flutter_app/features/Quran/book_mark/model/book_mark_model.dart';
 import 'package:flutter_app/generated/l10n.dart';
 import 'package:flutter_app/utils/helper/to_arabic.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

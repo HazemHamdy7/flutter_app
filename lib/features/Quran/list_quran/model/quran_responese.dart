@@ -64,6 +64,8 @@ class Surah {
 class Ayah {
   final String text;
   final int number;
+  String? audio;
+  List<String>? audioSecondary;
   final int numberInSurah;
   final int juz;
   final int manzil;
@@ -82,6 +84,8 @@ class Ayah {
     this.sajda, {
     required this.number,
     required this.text,
+    this.audio,
+    this.audioSecondary,
   });
   factory Ayah.fromJson(Map<String, dynamic> json) => Ayah(
         json["numberInSurah"],

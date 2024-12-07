@@ -9,7 +9,7 @@ class QuranAudioCubit extends Cubit<QuranAudioState> {
   QuranAudioCubit() : super(QuranAudioInitial());
 
   Future<void> fetchQuranData() async {
-    emit(QuranAudioLoading()); // Emit loading state before fetching data
+    emit(QuranAudioLoading());
 
     try {
       final response =

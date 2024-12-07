@@ -8,9 +8,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class CustomTextFieldtoSearch extends StatelessWidget {
   void Function(String)? onChanged;
   CustomTextFieldtoSearch({
-    Key? key,
+    super.key,
     this.onChanged,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

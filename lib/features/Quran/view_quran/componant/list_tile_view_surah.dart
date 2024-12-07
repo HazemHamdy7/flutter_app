@@ -1,11 +1,13 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_app/constants/assets.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_app/features/Quran/list_quran/model/surah_detail.dart';
 import 'package:flutter_app/features/choose_system/cubit/theme_cubit/theme_cubit.dart';
-import 'package:flutter_app/utils/helper/to_arabic.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:audioplayers/audioplayers.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'package:flutter_app/features/Quran/list_quran/model/surah_detail.dart';
+import 'package:flutter_app/features/Quran/view_quran/views/surah_detail_screen.dart';
+ import 'package:flutter_app/utils/helper/to_arabic.dart';
+import 'package:flutter_svg/svg.dart';
 
 class ListTileViewSurah extends StatefulWidget {
   final SurahDetail surahDetail;
@@ -16,31 +18,6 @@ class ListTileViewSurah extends StatefulWidget {
 }
 
 class _ListTileViewSurahState extends State<ListTileViewSurah> {
-  final AudioPlayer _audioPlayer = AudioPlayer(); // AudioPlayer instance
-  int? _playingAyahIndex; // Keep track of the currently playing Ayah
-
-  @override
-  void dispose() {
-    _audioPlayer
-        .dispose(); // Dispose the audio player when the widget is destroyed
-    super.dispose();
-  }
-
-  Future<void> _playAudio(String? audioUrl, int index) async {
-    if (audioUrl == null || audioUrl.isEmpty) {
-      print("No audio URL available for this Ayah.");
-      return;
-    }
-    setState(() {
-      _playingAyahIndex = index;
-    });
-    try {
-      await _audioPlayer.play(UrlSource(audioUrl));
-    } catch (e) {
-      print("Error playing audio: $e");
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     final themeCubit = context.read<ThemeCubit>();
@@ -118,24 +95,7 @@ class _ListTileViewSurahState extends State<ListTileViewSurah> {
                   ],
                 ),
               ),
-              trailing: IconButton(
-                icon: Icon(
-                  _playingAyahIndex == index ? Icons.pause : Icons.play_arrow,
-                  color: isDark ? Colors.white : Colors.black,
-                ),
-                onPressed: () {
-                  if (_playingAyahIndex == index) {
-                    _audioPlayer.stop();
-                    setState(() {
-                      _playingAyahIndex = null;
-                    });
-                  } else {
-                    //_playAudio(ayah.audioUrl, index);
-                  }
-                },
-              ),
-
-              onTap: () => {}, // Optional: Add custom behavior on Ayah tap
+              onTap: () => onLongPress(context, widget.surahDetail, ayah),
             ),
           );
         },

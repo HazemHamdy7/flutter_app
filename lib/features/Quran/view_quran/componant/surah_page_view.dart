@@ -41,7 +41,6 @@ class _SurahPageViewState extends State<SurahPageView> {
     final isDark = themeCubit.state.themeData == ThemeData.dark();
     const int ayahsPerPage = 10;
 
-    // Remove "بسم الله الرحمن الرحيم" from the first ayah if it exists
     if (_currentSurahDetail!.ayahs.isNotEmpty &&
         _currentSurahDetail!.ayahs[0].text
             .startsWith("بسم الله الرحمن الرحيم")) {
@@ -108,34 +107,34 @@ class _SurahPageViewState extends State<SurahPageView> {
       onPageChanged: (index) {
         if (index == pages.length - 1) {
           // Load next Surah when the last page is reached
-          _loadNextSurah();
+          //   _loadNextSurah();
         }
       },
     );
   }
 
-  void _loadNextSurah() async {
-    // Fetch the next Surah's details
-    final nextSurahDetail =
-        await fetchNextSurahDetail(_currentSurahDetail!.number + 1);
+  // void _loadNextSurah() async {
+  //   // Fetch the next Surah's details
+  //   final nextSurahDetail =
+  //       await fetchNextSurahDetail(_currentSurahDetail!.number + 1);
 
-    // Update the state with the new Surah details
-    setState(() {
-      _currentSurahDetail = nextSurahDetail;
-      _pageController.jumpToPage(0); // Reset to the first page of the new Surah
-    });
-  }
+  //   // Update the state with the new Surah details
+  //   setState(() {
+  //     _currentSurahDetail = nextSurahDetail;
+  //     _pageController.jumpToPage(0); // Reset to the first page of the new Surah
+  //   });
+  // }
 
-  Future<SurahDetail> fetchNextSurahDetail(int surahNumber) async {
-    // Implement your logic to fetch the next Surah's details
-    // This could be an API call or fetching from a local database
-    // For example:
-    final response =
-        await Dio().get('https://api.example.com/surah/$surahNumber');
-    if (response.statusCode == 200) {
-      return SurahDetail.fromJson(json.decode(response.data));
-    } else {
-      throw Exception('Failed to load Surah');
-    }
-  }
+  // Future<SurahDetail> fetchNextSurahDetail(int surahNumber) async {
+  //   // Implement your logic to fetch the next Surah's details
+  //   // This could be an API call or fetching from a local database
+  //   // For example:
+  //   final response =
+  //       await Dio().get('https://api.example.com/surah/$surahNumber');
+  //   if (response.statusCode == 200) {
+  //     return SurahDetail.fromJson(json.decode(response.data));
+  //   } else {
+  //     throw Exception('Failed to load Surah');
+  //   }
+  // }
 }

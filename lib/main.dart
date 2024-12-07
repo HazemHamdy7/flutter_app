@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/features/Quran/view_quran/cubit/book_mark/book_mark_cubit.dart';
+import 'package:flutter_app/features/Quran/book_mark/cubit/book_mark_cubit.dart';
+import 'package:flutter_app/features/Quran/list_quran/view/surah_list_screen.dart';
 import 'package:flutter_app/features/choose_language/cubits/language_cubit/language_cubit.dart';
 import 'package:flutter_app/features/choose_language/view/choose_language.dart';
 import 'package:flutter_app/features/choose_system/cubit/theme_cubit/theme_cubit.dart';
@@ -9,7 +10,6 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-
   runApp(const MyApp());
 }
 
@@ -41,7 +41,7 @@ class MyApp extends StatelessWidget {
                   supportedLocales: S.delegate.supportedLocales,
                   title: 'Flutter Demo',
                   theme: themeState.themeData,
-                  home: const ChooseLanguage());
+                  home: const SurahListPage());
             },
           );
         },

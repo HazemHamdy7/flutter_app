@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/constants/app_colors.dart';
 import 'package:flutter_app/features/Quran/list_quran/componant/custom_list_tile.dart';
+import 'package:flutter_app/features/Quran/view_quran/componant/surah_page_view.dart';
 import 'package:flutter_app/features/choose_system/cubit/theme_cubit/theme_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -9,6 +10,8 @@ class CustomDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final int surahNumber = 1;
+
     final isDark =
         context.watch<ThemeCubit>().state.themeData == ThemeData.dark();
     return Drawer(
@@ -56,7 +59,14 @@ class CustomDrawer extends StatelessWidget {
                   const SizedBox(width: 10),
                   Expanded(
                     child: OutlinedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => SurahPageView(
+                                      initialSurahNumber: surahNumber,
+                                    )));
+                      },
                       style: OutlinedButton.styleFrom(
                         side: BorderSide(color: AppColors.white),
                         backgroundColor: Colors.black87,

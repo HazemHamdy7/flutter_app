@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/features/Quran/book_mark/cubit/book_mark_cubit.dart';
 import 'package:flutter_app/features/Quran/list_quran/view/surah_list_screen.dart';
+import 'package:flutter_app/features/Quran/view_quran/cubit/surah_details_cubit.dart';
 import 'package:flutter_app/features/choose_language/cubits/language_cubit/language_cubit.dart';
-import 'package:flutter_app/features/choose_language/view/choose_language.dart';
 import 'package:flutter_app/features/choose_system/cubit/theme_cubit/theme_cubit.dart';
 import 'package:flutter_app/generated/l10n.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -24,6 +24,7 @@ class MyApp extends StatelessWidget {
             create: (context) => LanguageCubit()..changeLanguage("ar")),
         BlocProvider(create: (context) => ThemeCubit()..setInintialTheme()),
         BlocProvider(create: (_) => BookmarkCubit()),
+        BlocProvider(create: (context) => SurahDetailCubit()),
       ],
       child: BlocBuilder<ThemeCubit, ThemeState>(
         builder: (context, themeState) {

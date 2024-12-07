@@ -4,10 +4,10 @@ import 'package:flutter_app/constants/app_colors.dart';
 import 'package:flutter_app/constants/assets.dart';
 import 'package:flutter_app/features/Quran/list_quran/model/quran_responese.dart';
 import 'package:flutter_app/features/Quran/list_quran/model/surah_detail.dart';
-import 'package:flutter_app/features/Quran/view_quran/componant/List_view_quran.dart';
 import 'package:flutter_app/features/Quran/view_quran/componant/custom_drawer.dart';
-import 'package:flutter_app/features/Quran/view_quran/componant/list_tile_view_surah.dart';
 import 'package:flutter_app/features/Quran/book_mark/cubit/book_mark_cubit.dart';
+import 'package:flutter_app/features/Quran/view_quran/componant/list_tile_view_surah.dart';
+import 'package:flutter_app/features/Quran/view_quran/componant/surah_page_view.dart';
 import 'package:flutter_app/features/Quran/view_quran/cubit/surah_details_cubit.dart';
 import 'package:flutter_app/features/Quran/book_mark/model/book_mark_model.dart';
 import 'package:flutter_app/features/Quran/view_quran/views/book-mark_screen.dart';
@@ -128,7 +128,9 @@ class _SurahDetailScreenState extends State<SurahDetailScreen> {
 
                   return view
                       ? ListTileViewSurah(surahDetail: surahDetail)
-                      : ListViewQuran(surahDetail: surahDetail);
+                      : SurahPageView(
+                          initialSurahNumber: widget.surahNumber,
+                        );
                 },
               ),
             ),

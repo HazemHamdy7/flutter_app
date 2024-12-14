@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/constants/app_colors.dart';
 import 'package:flutter_app/features/Quran/list_quran/componant/custom_list_tile.dart';
+import 'package:flutter_app/features/Quran/list_quran/model/surah_detail.dart';
+import 'package:flutter_app/features/Quran/view_quran/componant/List_view_quran.dart';
 import 'package:flutter_app/features/Quran/view_quran/componant/surah_page_view.dart';
+import 'package:flutter_app/features/Quran/view_quran/cubit/surah_details_cubit.dart';
+import 'package:flutter_app/features/Quran/view_quran/views/surah_detail_screen.dart';
 import 'package:flutter_app/features/choose_system/cubit/theme_cubit/theme_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -10,8 +14,8 @@ class CustomDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final int surahNumber = 1;
-
+    const int surahNumber = 1;
+    final SurahDetail someSurahDetail;
     final isDark =
         context.watch<ThemeCubit>().state.themeData == ThemeData.dark();
     return Drawer(
@@ -44,16 +48,28 @@ class CustomDrawer extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Expanded(
-                    child: OutlinedButton(
-                      onPressed: () {},
-                      style: OutlinedButton.styleFrom(
-                        side: BorderSide(color: AppColors.white),
-                        backgroundColor: Colors.black87,
-                      ),
-                      child: Text(
-                        'المصحف الأفقي',
-                        style: TextStyle(color: AppColors.white),
-                      ),
+                    child: BlocBuilder<SurahDetailCubit, SurahDetail?>(
+                      builder: (context, surahDetail) {
+                        return OutlinedButton(
+                          onPressed: () {
+                            // Navigator.push(
+                            //     context,
+                            //     MaterialPageRoute(
+                            //       builder: (context) => ListTileViewSurah(
+                            //         surahDetail: surahDetail!,
+                            //       ),
+                            //     ));
+                          },
+                          style: OutlinedButton.styleFrom(
+                            side: BorderSide(color: AppColors.white),
+                            backgroundColor: Colors.black87,
+                          ),
+                          child: Text(
+                            'المصحف الأفقي',
+                            style: TextStyle(color: AppColors.white),
+                          ),
+                        );
+                      },
                     ),
                   ),
                   const SizedBox(width: 10),
@@ -63,9 +79,10 @@ class CustomDrawer extends StatelessWidget {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => SurahPageView(
-                                      initialSurahNumber: surahNumber,
-                                    )));
+                              builder: (context) => const SurahPageView(
+                                initialSurahNumber: surahNumber,
+                              ),
+                            ));
                       },
                       style: OutlinedButton.styleFrom(
                         side: BorderSide(color: AppColors.white),

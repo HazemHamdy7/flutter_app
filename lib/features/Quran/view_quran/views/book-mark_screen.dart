@@ -51,8 +51,9 @@ class BookmarkListScreen extends StatelessWidget {
                       maxLines: 1,
                     ),
                     onTap: () {
-                      // Navigate to SurahDetailScreen and pass the bookmark data
-                      Navigator.push(
+                      // final bookmarkCubit = context.read<BookmarkCubit>();
+                      // bookmarkCubit.addBookmark(bookmark);
+                      Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
                           builder: (context) => SurahDetailScreen(
